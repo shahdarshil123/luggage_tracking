@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update</title>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <script src ="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script src ="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+    <script defer src = "firebase_init.js"></script>
+    <script defer src = "user_data.js"></script>
+</head>
+<body>
+	<h3> Update data fields</h3>
+	<div>
+		<form method="post">
+			<input type = "text" name="name" id="user-name" placeholder="Name"><br>
+			<input type = "text" name="phone" id="user-phone" placeholder="Phone"><br>
+			<button id = "button">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+	<script defer src="firebase_init.js"></script>
+</head>
+<body>
+	<p1 id ="demo"></p1>
+	<script>
+	window.onload = function(){
+  		var db = firebase.firestore();
+  		var data;
+    	var docRef = db.collection("users").doc("darshilshah622@gmail.com");
+    	docRef.get().then(function(doc){
+    		data = doc.data();
+      		console.log(data)
+      		document.getElementById("demo").innerHTML = data.name;
+    	});
+    	
+    }
+	</script>
+</body>
+</html>

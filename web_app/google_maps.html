@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Map</title>
+    <link rel="stylesheet" type="text/css" href="login_page.css">
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBup7V4hB-3rZ7LbsNaxh7yFstUCIRPCSU&callback=initMap&libraries=&v=weekly"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <script defer src = "firebase_init.js"></script>
+    <script defer src = "get_location.js"></script>
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 600px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+      </style>
+  </head>
+  <body>
+    <h3 style = "color: white">Luggage Tracking System</h3>
+    <button id ="logout">Log out</button> 
+ <!--   <div>
+    	<h3>User Information</h3>
+    	<p id = "user-name"></p>
+    	<p id = "user-email"></p>
+    	<p id = "user-phone"></p>
+    	<p id = "user-latitude"></p>
+    	<p id = "user-longitude"></p>
+    </div><br> -->
+
+
+    <!--The div element for the map -->
+    <div id="map"></div>
+  </body>
+</html>

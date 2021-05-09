@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My location on maps!</title>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+	<script defer src = "firebase_init.js"></script>
+</head>
+<body>
+	<div>
+	<h1 id="ID">No User Identified!</h1>
+	</div>
+
+	<div>
+		<form method="POST">
+  			<label for="fname">Latitude:</label><br>
+  			<input type="number" step="0.0000001" id="latitude" name="Latitude" value="0.00"><br>
+  			<label for="lname">Longitude:</label><br>
+  			<input type="number" step  = "0.0000001" id="longitude" name="Longitude" value = "0.00"><br><br>
+		</form>
+	</div>
+
+	<div>
+		<button type = "button" id="change_location"> Get location</button>
+	</div><br><br>
+
+	<div>
+		<button type="button" id="update">Update</button>
+	</div>
+
+	<script>
+		window.onload = function(){
+		var db = firebase.firestore();
+		var email = window.localStorage.getItem("email");
+		console.log(email);
+		if(email != null){
+		 	var docRef = db.collection("users").doc(email);
+			console.log(email); 
+			docRef.onSnapshot( function(doc){
+				console.log(doc.data());
+				document.getElementById("ID").innerHTML = doc.data().name;
+				document.getElementById("longitude").value =  doc.data().longitude;
+				document.getElementById("latitude").value =  doc.data().latitude;
+			});
+
+
+			document.getElementById("update").addEventListener("click", (e)=>{
+			db.collection("users").doc(email).set({
+    			latitude: Number(document.getElementById("latitude").value),
+    			longitude: Number(document.getElementById("longitude").value)
+			},{ merge: true }).then(() => {
+    			console.log("Document successfully written!");
+    			window.alert("Database Updated");
+			}).catch((error) => {
+    			console.error("Error writing document: ", error);
+    			setTimeout(function(){
+    				window.alert("Please once refresh the page");
+    			    window.location.reload();
+    			})
+    			
+			});
+		});
+	}
+	else
+	{
+		console.log("NO USER FOUND");
+	}
+}
+
+	</script>
+
+	<script>
+		document.getElementById("change_location").addEventListener("click",(e) =>{
+			getLocation();
+		}); 
+
+		function getLocation() {
+  			if (navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(showPosition);
+    			console.log("Location found!");
+    			setTimeout(function(){
+    				window.alert("Browser location found");
+  					},2000);
+    		}
+  				else {
+    			 window.alert("Geolocation is not supported by this browser.");
+    			 console.log("Location not found!");
+  				}
+			}
+
+			function showPosition(position) {
+				console.log(position.coords.latitude);
+				console.log(position.coords.longitude);
+  				document.getElementById("latitude").value =  position.coords.latitude.toFixed(7);
+				document.getElementById("longitude").value =   position.coords.longitude.toFixed(7);
+
+			}
+
+	</script>
+
+</body>
+</html>
